@@ -7,16 +7,15 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Card from "../shared/Card";
 
-const image = { uri: "https://wallpapercave.com/wp/wp5461215.jpg" };
 
 export default function Search(props) {
   const [pokemon, SetPokemon] = React.useState([]);
-  const [searchpokemon, SetSearchPokemon] = React.useState(pokemon);
+  const [searchPokemon, SetSearchPokemon] = React.useState(pokemon);
   const [search, SetSearch] = React.useState("");
 
   React.useEffect(() => {
@@ -50,8 +49,11 @@ export default function Search(props) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={{ flex: 1,
-    justifyContent: "center"}} source={image} resizeMode="cover">
+      <ImageBackground
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        source={require('../assets/searchBackground.jpg')}
+        resizeMode="cover"
+      >
         <View style={styles.search}>
           <MaterialCommunityIcons name="pokemon-go" size={28} color="black" />
           <TextInput
@@ -63,11 +65,13 @@ export default function Search(props) {
         </View>
         <View style={{ alignItems: "center", flex: 1 }}>
           <FlatList
-            data={searchpokemon}
+            data={searchPokemon}
             numColumns={2}
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => props.navigation.navigate('Details' , item)}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate("Details", item)}
+              >
                 <Card>
                   <Image
                     style={styles.gif}
